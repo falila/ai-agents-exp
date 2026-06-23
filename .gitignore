@@ -1,0 +1,33 @@
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Environment files
+.env
+.env.*
+
+# Local runtime artifacts
+secure_rag_agent/data/
+*.sqlite3
+*.db
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Streamlit cache
+.streamlit/*
+!.streamlit/config.toml
