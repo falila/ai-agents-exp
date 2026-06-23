@@ -28,6 +28,10 @@ desktop.ini
 # Logs
 *.log
 
+# UV project metadata
+.python-version
+uv.lock
+
 # Streamlit cache
 .streamlit/*
 !.streamlit/config.toml

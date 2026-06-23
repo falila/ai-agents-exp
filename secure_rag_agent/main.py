@@ -48,7 +48,7 @@ def render_sidebar():
         value=st.session_state.rag_enabled,
     )
 
-    if st.sidebar.button("🗑️ Clear Chat History"):
+    if st.sidebar.button("🗑️ Reset Conversation History"):
         st.session_state.history = []
         st.experimental_rerun()
 
@@ -66,8 +66,8 @@ def render_sidebar():
 
 
 def main():
-    st.set_page_config(page_title="DeepSeek Local RAG Reasoning Agent")
-    st.title("🐋 DeepSeek Local RAG Reasoning Agent")
+    st.set_page_config(page_title="Secure Local RAG  Agent")
+    st.title("🐋 Secure Local RAG Agent")
 
     initialize_session_state()
     uploaded_file, web_url = render_sidebar()
