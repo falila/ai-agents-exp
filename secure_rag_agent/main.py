@@ -66,7 +66,7 @@ def render_sidebar():
 
 
 def main():
-    st.set_page_config(page_title="Secure Local RAG  Agent")
+    st.set_page_config(page_title="Secure Local RAG Agent")
     st.title("Secure Local RAG Agent")
 
     initialize_session_state()

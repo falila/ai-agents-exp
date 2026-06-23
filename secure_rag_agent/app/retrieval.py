@@ -1,5 +1,6 @@
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from agno.vectordb.chroma import ChromaDb
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
 from .config import CHROMA_PATH, COLLECTION_NAME
 
 

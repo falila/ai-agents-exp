@@ -1,5 +1,6 @@
 import tempfile
 from datetime import datetime
+
 from langchain_community.document_loaders import PyPDFLoader, WebBaseLoader
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -9,8 +10,12 @@ def split_texts(documents):
     """Split documents into overlapping chunks for retrieval."""
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     split_docs = splitter.split_documents(documents)
-    return [Document(page_content=doc.page_content, metadata=doc.metadata)
-            for doc in split_docs if doc.page_content.strip()]
+
+    return [
+        Document(page_content=doc.page_content, metadata=doc.metadata)
+        for doc in split_docs
+        if doc.page_content.strip()
+    ]
 
 
 def process_pdf(uploaded_file):
