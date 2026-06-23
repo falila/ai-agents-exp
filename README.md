@@ -1,34 +1,25 @@
 # 🤖 AI Agents & Intelligent Systems
 
-## Overview
-This repository contains a secure local Retrieval-Augmented Generation (RAG) agent project designed for on-device reasoning with private documents.
+Welcome to my central development hub dedicated to the design, orchestration, and deployment of production-grade AI agents. This repository serves as a living portfolio of my work in building self-directed intelligent systems, focusing heavily on robust multi-agent orchestration, contextual memory, and deterministic tool-use.
 
-## Current Project
-- `secure_rag_agent/` — a Streamlit-based RAG agent with local ChromaDB retrieval and Ollama-powered reasoning.
+## 🛠️ Core Stack & Expertise
 
-## Repository Structure
-- `README.md` — top-level repository overview and usage guidance
-- `.gitignore` — standard Python and local artifact exclusions
-- `secure_rag_agent/` — main agent project
-  - `main.py` — Streamlit entrypoint
-  - `requirements.txt` — Python dependencies
-  - `.env.example` — sample environment variables
-  - `app/` — application modules
-  - `data/` — local vector store location
-  - `tests/` — unit tests
+- **Frameworks:** LangChain, CrewAI, AutoGen, LlamaIndex
+- **LLMs & APIs:** OpenAI GPT-4, Anthropic Claude, Ollama (Local Models)
+- **Agentic Capabilities:** Tool Use (Function Calling), Multi-Agent Collaboration, Autonomous Planning, Memory Management
+- **Vector DBs & Tools:** Pinecone, ChromaDB, PGVector, Custom API Integrations
 
-## Getting Started
-1. Create a Python virtual environment
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate
-   pip install -r secure_rag_agent/requirements.txt
-   ```
-2. Copy environment variables
-   ```bash
-   cp secure_rag_agent/.env.example secure_rag_agent/.env
-   ```
-3. Run the app
-   ```bash
-   streamlit run secure_rag_agent/main.py
-   ```
+---
+
+## 🗂️ Featured AI Agents
+
+| Project | Core Framework | Key Features | Link |
+| :--- | :--- | :--- | :--- |
+| **01.Secure RAG Agent** | Agno, Google Gen AI, Ollama | Long-term memory, iterative web search| [View Project](./secure_rag_agent/) |
+
+
+---
+
+## 🚀 Getting Started (Global Overview)
+
+Each directory contains its own self-contained agent project with independent dependencies and configuration files. To run any specific agent, navigate to its directory:
