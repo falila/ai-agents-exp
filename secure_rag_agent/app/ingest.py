@@ -1,8 +1,8 @@
 import tempfile
 from datetime import datetime
 from langchain_community.document_loaders import PyPDFLoader, WebBaseLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.docstore.document import Document
+from langchain_core.documents import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 def split_texts(documents):

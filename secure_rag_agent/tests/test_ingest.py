@@ -1,6 +1,6 @@
 import pytest
 from app.ingest import split_texts
-from langchain.docstore.document import Document
+from langchain_core.documents import Document
 
 
 def test_split_texts_returns_non_empty_chunks():

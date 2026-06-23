@@ -1,6 +1,8 @@
 streamlit
 agno
 langchain
+langchain-core
+langchain-text-splitters
 langchain-google-genai
 langchain-community
 chromadb

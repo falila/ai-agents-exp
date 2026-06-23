@@ -1,0 +1,19 @@
+[project]
+name = "secure-rag-agent"
+version = "0.1.0"
+description = "A secure RAG agent for AI applications."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "agno>=2.6.19",
+    "chromadb>=1.5.9",
+    "langchain>=0.0.0",
+    "langchain-core>=1.4.8",
+    "langchain-text-splitters>=1.1.2",
+    "langchain-community>=0.4.2",
+    "langchain-google-genai>=4.2.5",
+    "pypdf>=6.14.2",
+    "pytest>=9.1.1",
+    "python-dotenv>=1.2.2",
+    "streamlit>=1.58.0",
+]
