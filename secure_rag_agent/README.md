@@ -28,14 +28,17 @@ A secure, local Retrieval-Augmented Generation (RAG) agent engineered for deep r
 1. Create a `.env` file from `.env.example`
 2. Install dependencies:
    ```bash
-   pip install -r secure_rag_agent/requirements.txt
+   # Add all dependencies from `requirements.txt`.
+   uv add -r requirements.txt 
    ```
 3. Start the app:
    ```bash
-   streamlit run secure_rag_agent/main.py
+   streamlit run main.py
    ```
 
 ## Notes
 
 - `GOOGLE_API_KEY` must be provided in environment variables.
 - `ollama` should be installed and `deepseek-r1:1.5b` should be available locally.
+
+![Secure Local RAG Agent Screenshot](pic.png)

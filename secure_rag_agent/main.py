@@ -128,7 +128,7 @@ def main():
             st.write(clean_response)
 
     elif not st.session_state.history:
-        st.warning("Ask a question to begin!")
+        st.warning("Ask a question!")
 
 
 if __name__ == "__main__":
