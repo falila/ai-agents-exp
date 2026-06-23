@@ -32,8 +32,3 @@ This repository contains a secure local Retrieval-Augmented Generation (RAG) age
    ```bash
    streamlit run secure_rag_agent/main.py
    ```
-
-## Notes
-- Do not commit `.env` files or local vector stores.
-- Keep `secure_rag_agent/data/` out of git for privacy and reproducibility.
-- Use the project-specific `README.md` inside `secure_rag_agent/` for additional setup details.
