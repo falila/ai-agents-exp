@@ -50,7 +50,7 @@ def render_sidebar():
 
     if st.sidebar.button("🗑️ Reset Conversation History"):
         st.session_state.history = []
-        st.experimental_rerun()
+        st.rerun()
 
     st.sidebar.header("🌐 Web Search Configuration")
     st.session_state.use_web_search = st.sidebar.checkbox(
