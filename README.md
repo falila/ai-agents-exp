@@ -16,7 +16,7 @@ Welcome to my central development hub dedicated to the design, orchestration, an
 | Project | Core Framework | Key Features | Link |
 | :--- | :--- | :--- | :--- |
 | **01.Secure RAG Agent** | Agno, Google Gen AI, Ollama | Long-term memory, iterative web search| [View Project](./secure_rag_agent/) |
-
+| **02.Architecture Team Graph** | langgraph, langchain, gpt-4o | Orchestrator + Parallel Specialist Fan-Out| [View Project](./architecture_team/) |
 
 ---
 

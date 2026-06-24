@@ -8,6 +8,8 @@ from langgraph.graph.message import add_messages
 # =====================================================================
 # 1. State Definition
 # =====================================================================
+
+
 class ArchitectureState(TypedDict):
     """
     Tracks the graph's runtime execution state.
@@ -130,6 +132,7 @@ def principal_reviewer_node(state: ArchitectureState):
 # =====================================================================
 # 3. Graph Routing & Topology Construction (Parallel Fan-Out/Fan-In)
 # =====================================================================
+
 
 def route_after_review(state: ArchitectureState):
     """Evaluates whether the board approved the design or needs another loop."""
