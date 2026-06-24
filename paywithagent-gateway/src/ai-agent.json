@@ -1,0 +1,82 @@
+{
+  "business_metadata": {
+    "legal_name": "Autonomous Roast Co. LLC",
+    "description": "Premium wholesale coffee roasters running machine-to-machine commerce workflows."
+  },
+  "settlement_profile": {
+    "network": "xrpl_testnet",
+    "merchant_receiving_address": "",
+    "payment_mechanisms_supported": ["direct_payment"]
+  },
+  "agent_endpoints": {
+    "discovery_inventory_url": "http://localhost:8000/ai-agent.json",
+    "request_invoice_url": "http://localhost:8000/api/v1/agent/invoice",
+    "webhook_delivery_notification_url": "http://gateway:8000/api/v1/agent/delivery-hook"
+  },
+  "inventory": [
+    {
+      "product_id": "PROD_001",
+      "sku": "COFFEE-ESP-BULK-01",
+      "name": "Office Espresso Beans Bulk (5lbs)",
+      "unit_price_xrp": 15.00,
+      "max_autonomous_order_qty": 10,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_002",
+      "sku": "MUG-ARTISAN-01",
+      "name": "Insulated Smart Desk Mug",
+      "unit_price_xrp": 25.00,
+      "max_autonomous_order_qty": 5,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_003",
+      "sku": "COFFEE-FLT-DARK-02",
+      "name": "Midnight Roast Filter Grind (2lbs)",
+      "unit_price_xrp": 8.50,
+      "max_autonomous_order_qty": 15,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_004",
+      "sku": "COFFEE-COLD-CONC-03",
+      "name": "Artisan Cold Brew Concentrate Keg",
+      "unit_price_xrp": 45.00,
+      "max_autonomous_order_qty": 2,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_005",
+      "sku": "MAT-FILTER-PAPER-01",
+      "name": "Unbleached V60 Paper Filters (100pk)",
+      "unit_price_xrp": 3.20,
+      "max_autonomous_order_qty": 50,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_006",
+      "sku": "SUBS-DESC-MONTHLY",
+      "name": "Monthly Single-Origin Bean Subscription",
+      "unit_price_xrp": 18.00,
+      "max_autonomous_order_qty": 1,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_007",
+      "sku": "EQUIP-SCALE-DIGITAL",
+      "name": "High-Precision Smart Brewing Scale",
+      "unit_price_xrp": 35.00,
+      "max_autonomous_order_qty": 3,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_008",
+      "sku": "LUXE-GOLD-BREWER",
+      "name": "Ultra Luxe Gold Coffeemaker",
+      "unit_price_xrp": 120.00,
+      "max_autonomous_order_qty": 1,
+      "requires_shipping_address": true
+    }
+  ]
+}

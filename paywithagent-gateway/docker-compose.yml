@@ -1,0 +1,32 @@
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: paywithagent_app
+    ports:
+      - "${STREAMLIT_SERVER_PORT}:${STREAMLIT_SERVER_PORT}"
+      - "${FASTAPI_SERVER_PORT}:${FASTAPI_SERVER_PORT}"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - XRPL_NETWORK_URL=${XRPL_NETWORK_URL}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+      - LLM_MODEL_NAME=${LLM_MODEL_NAME}
+      - WEBHOOK_SHARED_SECRET=${WEBHOOK_SHARED_SECRET}
+      - MAX_ALLOWANCE_XRP=${MAX_ALLOWANCE_XRP}
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: paywithagent_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
