@@ -1,98 +1,14 @@
 import streamlit as st
-import json
 import io
-import os
-import sqlite3
+import json
 import uuid
-from datetime import datetime
 from config import XRPL_NETWORK_URL, MERCHANT_RECEIVING_ADDRESS
 from xrpl_client.wallet import XRPLManager
 from agent.graph import compiled_agent_graph
+from db import initialize_history_db, fetch_transaction_history, record_settlement_history
+from utils import load_manifest, get_state_field, normalize_state_key, maybe_rerun
 
 NODE_URL = XRPL_NETWORK_URL
-DB_PATH = os.path.join(os.path.dirname(__file__), "merchant_history.db")
-
-
-def initialize_history_db():
-    conn = sqlite3.connect(DB_PATH, timeout=10)
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS merchant_transactions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            created_at TEXT NOT NULL,
-            thread_id TEXT,
-            invoice_id TEXT,
-            product_id TEXT,
-            price_drops INTEGER,
-            amount_xrp REAL,
-            merchant_address TEXT,
-            tx_hash TEXT,
-            status TEXT,
-            webhook_url TEXT
-        )
-        """
-    )
-    conn.commit()
-    conn.close()
-
-
-def record_transaction(entry):
-    conn = sqlite3.connect(DB_PATH, timeout=10)
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        INSERT INTO merchant_transactions (
-            created_at, thread_id, invoice_id, product_id, price_drops, amount_xrp,
-            merchant_address, tx_hash, status, webhook_url
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """,
-        (
-            entry["created_at"],
-            entry["thread_id"],
-            entry["invoice_id"],
-            entry["product_id"],
-            entry["price_drops"],
-            entry["amount_xrp"],
-            entry["merchant_address"],
-            entry["tx_hash"],
-            entry["status"],
-            entry["webhook_url"],
-        ),
-    )
-    conn.commit()
-    conn.close()
-
-
-def fetch_transaction_history():
-    conn = sqlite3.connect(DB_PATH, timeout=10)
-    cursor = conn.cursor()
-    cursor.execute(
-        "SELECT created_at, thread_id, invoice_id, product_id, price_drops, amount_xrp, merchant_address, tx_hash, status, webhook_url"
-        " FROM merchant_transactions ORDER BY id DESC"
-    )
-    rows = cursor.fetchall()
-    conn.close()
-    return rows
-
-
-def record_settlement_history(frozen, tx_hash, webhook_url, thread_id, merchant_address):
-    if not frozen:
-        return
-    entry = {
-        "created_at": datetime.utcnow().isoformat() + "Z",
-        "thread_id": thread_id,
-        "invoice_id": frozen.get("invoice_id"),
-        "product_id": frozen.get("target_product_id"),
-        "price_drops": frozen.get("price_drops"),
-        "amount_xrp": (frozen.get("price_drops", 0) or 0) / 1_000_000,
-        "merchant_address": merchant_address,
-        "tx_hash": tx_hash or "",
-        "status": "SETTLED" if tx_hash else "RELEASED",
-        "webhook_url": webhook_url or "",
-    }
-    record_transaction(entry)
-    st.session_state.history_rows = fetch_transaction_history()
 
 initialize_history_db()
 
@@ -100,10 +16,7 @@ if "history_rows" not in st.session_state:
     st.session_state.history_rows = fetch_transaction_history()
 
 xrpl_mgr = XRPLManager(NODE_URL)
-
-MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "ai-agent.json")
-with open(MANIFEST_PATH, "r") as f:
-    manifest_data = json.load(f)
+manifest_data = load_manifest()
 
 configured_merchant_address = MERCHANT_RECEIVING_ADDRESS or manifest_data["settlement_profile"].get("merchant_receiving_address")
 
@@ -147,41 +60,6 @@ run_config = {
 
 if "current_progress_stage" not in st.session_state:
     st.session_state.current_progress_stage = None
-
-
-def get_state_field(state, field):
-    if state is None:
-        return None
-    if not hasattr(state, field):
-        return None
-    value = getattr(state, field)
-    if callable(value):
-        try:
-            return value()
-        except TypeError:
-            return value
-    return value
-
-
-def normalize_state_key(value):
-    if value is None:
-        return None
-    if isinstance(value, (list, tuple)) and len(value) > 0:
-        return normalize_state_key(value[0])
-    if isinstance(value, dict):
-        return normalize_state_key(value.get("name") or value.get("id"))
-    if isinstance(value, str):
-        return value
-    return None
-
-
-def maybe_rerun():
-    rerun = getattr(st, "experimental_rerun", None)
-    if callable(rerun):
-        try:
-            rerun()
-        except Exception:
-            pass
 
 with st.sidebar:
     agent_wallet_address = st.session_state.agent_wallet.address if st.session_state.agent_wallet is not None else "Unavailable"
