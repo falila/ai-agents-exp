@@ -1,0 +1,21 @@
+[project]
+name = "paywithagent-gateway"
+version = "0.1.0"
+description = "Multi-Agent XRPL Small Business Payment Gateway"
+readme = "README.md"
+
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit>=1.35.0",
+    "xrpl-py>=4.4.0",
+    "langgraph>=1.2.5",
+    "langchain-ollama>=1.0.1",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.28.0",
+]
+
+[tool.uv]
+managed = true
+dev-dependencies = [
+    "pytest>=9.1.0",
+]

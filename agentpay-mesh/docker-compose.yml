@@ -1,0 +1,88 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: machinetomachine_api
+    command: ["uvicorn", "api_server:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - XRPL_NETWORK_URL=${XRPL_NETWORK_URL}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+      - LLM_MODEL_NAME=${LLM_MODEL_NAME}
+      - WEBHOOK_SHARED_SECRET=${WEBHOOK_SHARED_SECRET}
+      - MAX_ALLOWANCE_XRP=${MAX_ALLOWANCE_XRP}
+      - MERCHANT_RECEIVING_ADDRESS=${MERCHANT_RECEIVING_ADDRESS}
+      - MERCHANT_WALLET_ADDRESS=${MERCHANT_WALLET_ADDRESS}
+      - MERCHANT_WALLET_SECRET=${MERCHANT_WALLET_SECRET}
+      - CONSUMER_WALLET_ADDRESS=${CONSUMER_WALLET_ADDRESS}
+      - CONSUMER_WALLET_SECRET=${CONSUMER_WALLET_SECRET}
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  merchant_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: machinetomachine_merchant_app
+    command: ["streamlit", "run", "src/merchant_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - API_BASE_URL=http://api:8000
+      - MERCHANT_MANIFEST_URL=http://api:8000/ai-agent.json
+      - XRPL_NETWORK_URL=${XRPL_NETWORK_URL}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+      - LLM_MODEL_NAME=${LLM_MODEL_NAME}
+      - WEBHOOK_SHARED_SECRET=${WEBHOOK_SHARED_SECRET}
+      - MAX_ALLOWANCE_XRP=${MAX_ALLOWANCE_XRP}
+      - MERCHANT_RECEIVING_ADDRESS=${MERCHANT_RECEIVING_ADDRESS}
+      - MERCHANT_WALLET_ADDRESS=${MERCHANT_WALLET_ADDRESS}
+      - MERCHANT_WALLET_SECRET=${MERCHANT_WALLET_SECRET}
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  consumer_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: machinetomachine_consumer_app
+    command: ["streamlit", "run", "src/consumer_app.py", "--server.port=8502", "--server.address=0.0.0.0"]
+    ports:
+      - "8502:8502"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - API_BASE_URL=http://api:8000
+      - MERCHANT_MANIFEST_URL=http://api:8000/ai-agent.json
+      - XRPL_NETWORK_URL=${XRPL_NETWORK_URL}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+      - LLM_MODEL_NAME=${LLM_MODEL_NAME}
+      - WEBHOOK_SHARED_SECRET=${WEBHOOK_SHARED_SECRET}
+      - MAX_ALLOWANCE_XRP=${MAX_ALLOWANCE_XRP}
+      - MERCHANT_RECEIVING_ADDRESS=${MERCHANT_RECEIVING_ADDRESS}
+      - MERCHANT_WALLET_ADDRESS=${MERCHANT_WALLET_ADDRESS}
+      - CONSUMER_WALLET_ADDRESS=${CONSUMER_WALLET_ADDRESS}
+      - CONSUMER_WALLET_SECRET=${CONSUMER_WALLET_SECRET}
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: machinetomachine_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

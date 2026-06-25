@@ -1,0 +1,53 @@
+{
+  "business_metadata": {
+    "legal_name": "Autonomous Roast Co. LLC",
+    "description": "Premium wholesale coffee roasters running machine-to-machine commerce workflows."
+  },
+  "inventory": [
+    {
+      "product_id": "PROD_001",
+      "sku": "COFFEE-ESP-BULK-01",
+      "name": "Office Espresso Beans Bulk (5lbs)",
+      "description": "Rich dark roast espresso beans for high-volume office brewing.",
+      "unit_price_xrp": 15.00,
+      "max_autonomous_order_qty": 10,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_002",
+      "sku": "MUG-ARTISAN-01",
+      "name": "Insulated Smart Desk Mug",
+      "description": "Temperature-regulating smart mug with app-enabled brew alerts.",
+      "unit_price_xrp": 25.00,
+      "max_autonomous_order_qty": 5,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_003",
+      "sku": "COFFEE-FLT-DARK-02",
+      "name": "Midnight Roast Filter Grind (2lbs)",
+      "description": "Single-origin dark roast filter coffee for premium pour-over service.",
+      "unit_price_xrp": 8.50,
+      "max_autonomous_order_qty": 15,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_004",
+      "sku": "COFFEE-COLD-CONC-03",
+      "name": "Artisan Cold Brew Concentrate Keg",
+      "description": "Ready-to-mix concentrate for cold brew cafes and event catering.",
+      "unit_price_xrp": 45.00,
+      "max_autonomous_order_qty": 2,
+      "requires_shipping_address": true
+    },
+    {
+      "product_id": "PROD_005",
+      "sku": "MAT-FILTER-PAPER-01",
+      "name": "Unbleached V60 Paper Filters (100pk)",
+      "description": "Eco-friendly filters for clean-tasting manual brews.",
+      "unit_price_xrp": 3.20,
+      "max_autonomous_order_qty": 50,
+      "requires_shipping_address": true
+    }
+  ]
+}

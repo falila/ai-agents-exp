@@ -1,0 +1,37 @@
+sequenceDiagram
+    participant User
+    participant StreamlitApp
+    participant AgentGraph
+    participant Tools
+    participant XRPL
+    participant Webhook
+    participant SQLiteDB
+    participant Ollama
+
+    User->>StreamlitApp: Load dashboard
+    StreamlitApp->>SQLiteDB: fetch transaction history
+    StreamlitApp->>Config: load settings
+    StreamlitApp->>AgentGraph: prepare workflow config
+
+    User->>StreamlitApp: Run Multi-Agent Cycle
+    StreamlitApp->>AgentGraph: stream(initial_state)
+
+    AgentGraph->>Ollama: procurement decision
+    Ollama-->>AgentGraph: procurement result
+    AgentGraph->>AgentGraph: risk_audit decision
+    AgentGraph-->>StreamlitApp: pause before settlement
+
+    StreamlitApp->>User: show approval UI
+    User->>StreamlitApp: approve release
+    StreamlitApp->>AgentGraph: resume graph
+
+    AgentGraph->>Tools: xrpl_settlement_node()
+    Tools->>XRPL: submit payment
+    XRPL-->>Tools: tx_hash
+    Tools->>Webhook: send delivery notification
+    Webhook-->>Tools: webhook success
+    Tools-->>AgentGraph: settlement result
+
+    AgentGraph-->>StreamlitApp: workflow completed
+    StreamlitApp->>SQLiteDB: record transaction row
+    StreamlitApp-->>User: show merchant history updated
