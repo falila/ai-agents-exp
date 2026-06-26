@@ -1,0 +1,28 @@
+[project]
+name = "enterprise-fraud-resolution-hub"
+version = "0.1.0"
+description = "Multi-Agent Cross-Modal Risk Investigation Dashboard using Agno, DeepSeek-R1, and Kimi K2.5"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {text = "MIT"}
+dependencies = [
+    "streamlit>=1.35.0",      # UI Dashboard Framework
+    "agno>=1.0.0",            # Multi-Agent Orchestration Engine (formerly Phidata)
+    "openai>=1.30.0",         # Required by Agno model integrations
+    "ollama>=0.2.0",          # Local Model Inference Client Connector
+    "pandas>=2.2.0",          # Transaction Ledger CSV Processing
+    "ddgs>=8.0.0",            # Required by Agno DuckDuckGoTools
+    "duckduckgo-search>=6.0.0", # OSINT Web Footprint Retrieval Engine Plugin
+    "pillow>=10.3.0",         # Cross-Modal Image/KYC Verification Layers
+    "pydantic>=2.7.0",        # Enforces Strict Structured JSON Formats for Verdicts
+]
+
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build-meta"
+
+[tool.uv]
+dev-dependencies = [
+    "black>=24.4.0",          # Strict Python code formatting
+    "isort>=5.13.0",          # Keeps dependency imports sorted neatly
+]

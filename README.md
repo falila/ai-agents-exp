@@ -19,6 +19,7 @@ Welcome to my central development hub dedicated to the design, orchestration, an
 | **02.Architecture Team Graph** | langgraph, langchain, gpt-4o | Orchestrator + Parallel Specialist Fan-Out| [View Project](./architecture_team/) |
 | **03.Pay With Agent Gateway with HITL** | langgraph, Ollama, llama, gemma, blockchain | Machine to Machine payment, Agent Gateway , Autonomous | [View Project](./paywithagent-gateway/) |
 | **04.Agent Pay Mesh** | langgraph, Ollama, llama, gemma, blockchain | Product discovery, Marchant negotiation, Machine to Machine payment | [View Project](./agentpay-mesh/) |
+| **05.Multi-Agent Fraud Investigation Swarm** | Agno, Ollama, DeepSeek-R1, Streamlit | Cross-modal fraud analysis, KYC image review, team-based verdict synthesis | [View Project](./multi-agent-fraud-investigation-swarm/) |
 
 ---
 
