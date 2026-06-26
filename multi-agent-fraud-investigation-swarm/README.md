@@ -15,9 +15,9 @@ The current design is optimized for analysts who need to:
 
 ## 🎬 Demo Video
 
-<video src="./multi_agent.mp4" controls width="960">
-	Your browser does not support embedded videos. Download and open `multi_agent.mp4` directly.
-</video>
+---
+
+[![Watch the video]([https://youtube.com](https://github.com/user-attachments/assets/bf9031ed-6d83-44b6-bc31-5821b3224f7d))](https://github.com/user-attachments/assets/bf9031ed-6d83-44b6-bc31-5821b3224f7d)
 
 ---
 
